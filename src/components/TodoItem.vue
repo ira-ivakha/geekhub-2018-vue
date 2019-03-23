@@ -5,17 +5,19 @@
                    v-bind:checked="todo.completed"
                    v-on:change="changeTodo"/>
             {{todo.title}}
-            <button @click="$emit('del-todo', todo.id)">X</button>
+            <button @click="deleteTodo(todo.id)">X</button>
         </label>
     </div>
 </template>
 
 <script>
+    import {mapActions} from 'vuex';
 
     export default {
         name: "TodoItem",
         props: ["todo"],
         methods: {
+            ...mapActions(['deleteTodo']),
             changeTodo(){
                 this.todo.completed = !this.todo.completed;
             }

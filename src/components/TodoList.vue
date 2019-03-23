@@ -3,7 +3,7 @@
 
 
         <ul>
-            <li v-for="todo in todos" v-bind:key="todo.id">
+            <li v-for="todo in allTodos" v-bind:key="todo.id">
                 <TodoItem v-bind:todo="todo" v-on:del-todo="$emit('del-todo', todo.id)" />
             </li>
         </ul>
@@ -11,13 +11,17 @@
 </template>
 
 <script>
-
+    import { mapGetters, mapActions} from 'vuex';
 
     import TodoItem from './TodoItem';
 
     export default {
         name: "TodoList",
-        props: ["todos"],
+        methods: {...mapActions(['fetchTodos'])},
+        computed: mapGetters(['allTodos']),
+        created() {
+            this.fetchTodos();
+        },
         components: {
             TodoItem
         }

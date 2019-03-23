@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit="addTodo">
+        <form @submit="onSubmit">
             <input type="text" v-model="title" name="title" placeholder="Add Todo">
             <input type="submit" value="Add Todo" class="button">
         </form>
@@ -9,6 +9,7 @@
 
 <script>
     import uuid from 'uuid';
+    import { mapActions } from 'vuex';
     export default {
         name: "AddTodo",
         data(){
@@ -17,17 +18,13 @@
             }
         },
         methods: {
-            addTodo(e){
+            ...mapActions(['addTodo']),
+            onSubmit(e){
 
                 e.preventDefault();
                 if (this.title!=='') {
-                    const newTodo = {
-                        id: uuid.v4(),
-                        title: this.title,
-                        completed: false
-                    };
 
-                    this.$emit('add-todo', newTodo);
+                    this.addTodo(this.title);
                     this.title = '';
 
                 }
@@ -36,3 +33,8 @@
         }
     }
 </script>
+<style>
+    input[type=text] {
+        font-family: inherit;
+    }
+</style>

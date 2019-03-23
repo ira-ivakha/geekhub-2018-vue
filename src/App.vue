@@ -9,8 +9,10 @@
 </template>
 
 <style>
+  body,
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  @import url('https://fonts.googleapis.com/css?family=Gochi+Hand');
+  font-family: 'Gochi Hand', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
